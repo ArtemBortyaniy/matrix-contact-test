@@ -1,7 +1,8 @@
+import React from "react";
 import { Helmet } from "react-helmet";
 import Welcome from "../components/Welcome/Welcome";
 
-export default function Home() {
+const Home: React.FC = () => {
   return (
     <div>
       <Helmet>
@@ -10,4 +11,6 @@ export default function Home() {
       <Welcome />
     </div>
   );
-}
+};
+
+export default Home;

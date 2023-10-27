@@ -1,23 +1,33 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { ThunkDispatch } from "redux-thunk";
+import { AnyAction } from "redux";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import { logIn } from "../../redux/auth/operations";
 import css from "./LoginForm.module.css";
 
-export const LoginForm = () => {
-  const dispatch = useDispatch();
+interface FormValues {
+  username: string;
+  password: string;
+}
 
-  const initialValues = {
-    username: "",
-    password: "",
-  };
+const initialValues: FormValues = {
+  username: "",
+  password: "",
+};
 
-  const SignupSchema = Yup.object().shape({
-    username: Yup.string().min(1).max(150).required(),
-    password: Yup.string().min(1).max(128).required(),
-  });
+const SignupSchema = Yup.object().shape({
+  username: Yup.string().min(1).max(150).required(),
+  password: Yup.string().min(1).max(128).required(),
+});
 
-  function handleSubmit(values, { resetForm }) {
+const LoginForm: React.FC = () => {
+  const dispatch = useDispatch<ThunkDispatch<{}, {}, AnyAction>>();
+
+  const handleSubmit = (
+    values: FormValues,
+    { resetForm }: { resetForm: () => void }
+  ) => {
     dispatch(
       logIn({
         username: values.username,
@@ -26,7 +36,7 @@ export const LoginForm = () => {
     );
 
     resetForm();
-  }
+  };
 
   return (
     <Formik

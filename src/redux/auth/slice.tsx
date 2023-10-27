@@ -1,16 +1,20 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { logIn } from "./operations";
 
-const initialState = {
+interface AuthState {
+  isLoggedIn: boolean;
+}
+
+const initialState: AuthState = {
   isLoggedIn: false,
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
+  reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(logIn.fulfilled, (state, action) => {
-      // state.token = action.payload.token;
+    builder.addCase(logIn.fulfilled, (state) => {
       state.isLoggedIn = true;
     });
   },

@@ -1,10 +1,22 @@
+import React from "react";
 import { useDispatch } from "react-redux";
 import * as Yup from "yup";
+import { ThunkDispatch } from "redux-thunk";
+import { AnyAction } from "redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { changeContact } from "../../redux/contacts/operations";
 import css from "./FormEdit.module.css";
 
-export const FormEdit = ({
+interface FormEditProps {
+  id: string;
+  username: string;
+  birthday_date: string;
+  email: string;
+  phone_number: string;
+  address: string;
+}
+
+export const FormEdit: React.FC<FormEditProps> = ({
   id,
   username,
   birthday_date,
@@ -12,8 +24,17 @@ export const FormEdit = ({
   phone_number,
   address,
 }) => {
-  const dispatch = useDispatch();
-  const initialValues = {
+  const dispatch = useDispatch<ThunkDispatch<{}, {}, AnyAction>>();
+
+  interface InitialValues {
+    name: string;
+    birthday_date: string;
+    email: string;
+    phone_number: string;
+    address: string;
+  }
+
+  const initialValues: InitialValues = {
     name: username,
     birthday_date,
     email,
@@ -41,9 +62,13 @@ export const FormEdit = ({
     address: Yup.string().min(1).required(),
   });
 
-  function handleSubmit(values, { resetForm }) {
-    console.log({ id, ...values });
+  function handleSubmit(
+    values: InitialValues,
+    { resetForm }: { resetForm: () => void }
+  ) {
     dispatch(changeContact({ id, ...values }));
+
+    resetForm();
   }
 
   return (

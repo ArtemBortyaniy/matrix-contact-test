@@ -5,7 +5,7 @@ import { ContactItem } from "../ContactItem/ContactItem";
 
 export const ContactList: React.FC = () => {
   type Contact = {
-    id: number;
+    id: string;
     name: string;
     birthday_date: string;
     email: string;

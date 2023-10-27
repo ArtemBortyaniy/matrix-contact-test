@@ -8,7 +8,7 @@ const HomePage = lazy(() => import("../../pages/Home"));
 const LoginPage = lazy(() => import("../../pages/Login"));
 const ContactsPage = lazy(() => import("../../pages/Contacts"));
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>

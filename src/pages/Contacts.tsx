@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Helmet } from "react-helmet";
-
+import { ThunkDispatch } from "redux-thunk";
+import { AnyAction } from "redux";
 import { fetchContacts } from "../redux/contacts/operations";
 import Background from "../images/matrix.jpg";
 import { ContactList } from "../components/ContactList/ContactList";
@@ -12,16 +13,16 @@ const styles = {
   container: {
     height: `100vh`,
     padding: `60px`,
-    backgroundImage: ` url(${Background})`,
+    backgroundImage: `url(${Background})`,
     backgroundSize: `500px`,
   },
 };
 
-export default function Contacts() {
-  const dispatch = useDispatch();
+const Contacts: React.FC = () => {
+  const dispatch = useDispatch<ThunkDispatch<{}, {}, AnyAction>>();
 
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(fetchContacts(0));
   }, [dispatch]);
 
   return (
@@ -34,4 +35,6 @@ export default function Contacts() {
       <MatrixText />
     </div>
   );
-}
+};
+
+export default Contacts;

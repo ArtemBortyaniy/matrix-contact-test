@@ -3,7 +3,7 @@ import { Modal } from "../Modal/Modal";
 import { FormEdit } from "../FormEdit/FormEdit";
 
 interface ContactItemProps {
-  id: number;
+  id: string;
   username: string;
   birthday_date: string;
   email: string;
@@ -19,8 +19,8 @@ export const ContactItem: React.FC<ContactItemProps> = ({
   phone_number,
   address,
 }) => {
-  const [showModal, setShowModal] = useState(false);
-  const toggleModal = () => {
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const toggleModal = (): void => {
     setShowModal(!showModal);
   };
 

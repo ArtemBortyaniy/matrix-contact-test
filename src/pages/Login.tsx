@@ -1,3 +1,4 @@
+import React from "react";
 import { Helmet } from "react-helmet";
 import LoginForm from "../components/LoginForm/LoginForm";
 import Background from "../images/matrix.jpg";
@@ -10,8 +11,7 @@ const styles = {
     backgroundSize: `500px`,
   },
 };
-
-export default function Login() {
+const Login: React.FC = () => {
   return (
     <div style={styles.container}>
       <Helmet>
@@ -20,4 +20,6 @@ export default function Login() {
       <LoginForm />
     </div>
   );
-}
+};
+
+export default Login;

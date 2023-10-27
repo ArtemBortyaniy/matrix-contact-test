@@ -1,3 +1,4 @@
+import React from "react";
 import Background from "../../images/matrix-telephone.jpg";
 import { Wrapper, Title, Text, Cursor } from "./Welcome.styled";
 
@@ -7,7 +8,7 @@ const styles = {
   },
 };
 
-const Welcome = () => {
+const Welcome: React.FC = () => {
   return (
     <Wrapper style={styles.container}>
       <Title>
